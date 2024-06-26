@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+on<!DOCTYPE html>
 <html>
 <head>
     <title>Map of Locations</title>
@@ -44,8 +44,8 @@
         locations.forEach(function(location) {
             var lat = dmsToDecimal(location.Latitude);
             var lng = dmsToDecimal(location.Longitude);
-            var popupContent = `<b>${location["Port name"]}</b><br>
-                                Country: ${location["Country"]}<br>
+            var popupContent = `<b>${location["Port Name"]}</b><br>
+                                Country: ${location["Country/Region"]}<br>
                                 UNLOCODE: ${location["UNLOCODE"]}`;
 
             L.marker([lat, lng]).addTo(map)
