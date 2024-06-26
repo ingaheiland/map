@@ -26,7 +26,7 @@
 
         locations.forEach(function(location) {
             L.marker([location.Latitude, location.Longitude]).addTo(map)
-                .bindPopup(location."Port Name");
+                .bindPopup(location.UNLOCODE);
         });
     </script>
 </body>
