@@ -44,8 +44,12 @@
         locations.forEach(function(location) {
             var lat = dmsToDecimal(location.Latitude);
             var lng = dmsToDecimal(location.Longitude);
+            var popupContent = `<b>${location["Port name"]}</b><br>
+                                Country: ${location["Country"]}<br>
+                                UNLOCODE: ${location["UNLOCODE"]}`;
+
             L.marker([lat, lng]).addTo(map)
-                .bindPopup(location.UNLOCODE);
+                .bindPopup(popupContent);
         });
     </script>
 </body>
