@@ -18,6 +18,23 @@
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
     <script src="locations.js"></script> <!-- This is where your locations array is stored -->
     <script>
+        function dmsToDecimal(dms) {
+            var parts = dms.match(/(\d+)[°](\d+)[']?\s*([NSEW])/);
+            if (parts) {
+                var degrees = parseInt(parts[1], 10);
+                var minutes = parseInt(parts[2], 10);
+                var direction = parts[3];
+
+                var decimal = degrees + minutes / 60;
+                if (direction === "S" || direction === "W") {
+                    decimal *= -1;
+                }
+                return decimal;
+            } else {
+                throw new Error("Invalid DMS format");
+            }
+        }
+
         var map = L.map('map').setView([37.0902, -95.7129], 4); // Center of the USA
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -25,7 +42,9 @@
         }).addTo(map);
 
         locations.forEach(function(location) {
-            L.marker([location.Latitude, location.Longitude]).addTo(map)
+            var lat = dmsToDecimal(location.Latitude);
+            var lng = dmsToDecimal(location.Longitude);
+            L.marker([lat, lng]).addTo(map)
                 .bindPopup(location.UNLOCODE);
         });
     </script>
